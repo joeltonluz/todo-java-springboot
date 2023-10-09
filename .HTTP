@@ -1,0 +1,15 @@
+GET http://localhost:8080/firstRoute/
+
+###
+
+POST http://localhost:8080/users/
+Content-Type: : application/json
+
+{
+  "name": "Joelton Lino Luz",
+  "username": "joeltonluz",
+  "password": "12345"
+}
+
+
+
