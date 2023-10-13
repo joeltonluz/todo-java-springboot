@@ -20,7 +20,6 @@ public class UserController {
   private IUserRepository userRepository;
 
   @PostMapping("/")
-
   public ResponseEntity create(@RequestBody UserModel userModel) {
     var user = this.userRepository.findByUsername(userModel.getUsername());
 
@@ -37,10 +36,10 @@ public class UserController {
   }
 
   @GetMapping("/")
+  public ResponseEntity findAllUser() {
+    var users = this.userRepository.findAll();
 
-  public String get() {
-    // var userFound = this.userRepository.findAll();
-    return "userFound";
+    return ResponseEntity.status(HttpStatus.OK).body(users);
   }
 
 }
