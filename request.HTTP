@@ -3,6 +3,10 @@
 @idUser = {{ createUser.response.body.id }}
 @idTask = {{ createTask.response.body.id }}
 
+### Healthy Controller
+GET http://localhost:8080/
+Content-Type: application/json
+
 ###
 # @name createUser
 POST http://localhost:8080/users/
