@@ -21,40 +21,39 @@ public class FilterTaskAuth extends OncePerRequestFilter {
   private IUserRepository userRepository;
 
   @Override
-  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+      throws ServletException, IOException {
     var servletPath = request.getServletPath();
-    if(servletPath.equals("/tasks/")) {
-      System.out.println("rota tasks");
-
+    if (servletPath.startsWith("/tasks/")) {
       // Pegar a autenticação (usuário e senha)
       var authorization = request.getHeader("Authorization");
-  
+
       var passwordEncoded = authorization.substring("Basic".length()).trim();
-  
+
       byte[] passwordDecode = Base64.getDecoder().decode(passwordEncoded);
-  
+
       var passwordString = new String(passwordDecode);
-  
+
       String[] credentials = passwordString.split(":");
       String username = credentials[0];
       String password = credentials[1];
-      
-      //Validar usuário
+
+      // Validar usuário
       var user = this.userRepository.findByUsername(username);
       if (user == null) {
         response.sendError(401);
       } else {
-        //Validar senha
+        // Validar senha
         var passwordVerify = BCrypt.verifyer().verify(password.toCharArray(), user.getPassword());
-        if (passwordVerify.verified)  {
+        if (passwordVerify.verified) {
+          request.setAttribute("idUser", user.getId());
           filterChain.doFilter(request, response);
         } else {
           response.sendError(401);
-        }      
+        }
       }
     } else {
-      System.out.println("outra rota");
       filterChain.doFilter(request, response);
     }
-  }  
+  }
 }

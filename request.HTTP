@@ -1,6 +1,7 @@
 @authUser = {{ createUser.request.body.username }}
 @authPass = {{ createUser.request.body.password }}
 @idUser = {{ createUser.response.body.id }}
+@idTask = {{ createTask.response.body.id }}
 
 ###
 # @name createUser
@@ -8,21 +9,39 @@ POST http://localhost:8080/users/
 Content-Type: application/json
 
 {
-  "name": "Joelton Lino Luzx",
-  "username": "joeltonluzz",
+  "name": "Joelton Lino Luz",
+  "username": "joeltonluz",
   "password": "12345"
 }
 
 ###
+# @name createTask
 POST http://localhost:8080/tasks/
 Content-Type: application/json
 Authorization: Basic {{authUser}}:{{authPass}}
 
 {
   "description": "Tarefa para gravar aula (SpringBoot)",
-  "title": "Java SpringBoot",
+  "title": "Java SpringBoot jluz",
   "priority": "ALTA",
-  "startAt": "2023-10-06T12:30:00",
-  "endAt": "2024-10-06T12:30:00",
-  "idUser": "{{idUser}}"
+  "startAt": "2023-11-06T12:30:00",
+  "endAt": "2024-11-06T12:30:00"
+}
+
+###
+GET http://localhost:8080/tasks/
+Content-Type: application/json
+Authorization: Basic {{authUser}}:{{authPass}}
+
+###
+PUT http://localhost:8080/tasks/{{idTask}}
+Content-Type: application/json
+Authorization: Basic {{authUser}}:{{authPass}}
+
+{
+  "description": "Tarefa para gravar aula (SpringBoot)",
+  "title": "Título alterado 2",
+  "priority": "ALTA",
+  "startAt": "2023-11-06T12:30:00",
+  "endAt": "2024-11-06T12:30:00"
 }
