@@ -1,11 +1,28 @@
+@authUser = {{ createUser.request.body.username }}
+@authPass = {{ createUser.request.body.password }}
+@idUser = {{ createUser.response.body.id }}
+
+###
+# @name createUser
 POST http://localhost:8080/users/
 Content-Type: application/json
 
 {
-  "name": "Joelton Lino Luz",
-  "username": "joeltonluz",
+  "name": "Joelton Lino Luzx",
+  "username": "joeltonluzz",
   "password": "12345"
 }
 
+###
+POST http://localhost:8080/tasks/
+Content-Type: application/json
+Authorization: Basic {{authUser}}:{{authPass}}
 
-
+{
+  "description": "Tarefa para gravar aula (SpringBoot)",
+  "title": "Java SpringBoot",
+  "priority": "ALTA",
+  "startAt": "2023-10-06T12:30:00",
+  "endAt": "2024-10-06T12:30:00",
+  "idUser": "{{idUser}}"
+}
