@@ -10,7 +10,7 @@ Content-Type: application/json
 
 {
   "name": "Joelton Lino Luz",
-  "username": "joeltonluz",
+  "username": "teste",
   "password": "12345"
 }
 
@@ -39,9 +39,5 @@ Content-Type: application/json
 Authorization: Basic {{authUser}}:{{authPass}}
 
 {
-  "description": "Tarefa para gravar aula (SpringBoot)",
-  "title": "Título alterado 2",
-  "priority": "ALTA",
-  "startAt": "2023-11-06T12:30:00",
-  "endAt": "2024-11-06T12:30:00"
+  "title": "ALTERADO"
 }
